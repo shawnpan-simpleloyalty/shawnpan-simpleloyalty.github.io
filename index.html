@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,18 +11,22 @@
       margin: 20px auto;
       border-collapse: collapse;
     }
-    th, td {
+
+    th,
+    td {
       border: 1px solid #ddd;
       padding: 8px;
       text-align: center;
     }
+
     th {
       background-color: #f4f4f4;
     }
   </style>
 </head>
+
 <body>
-  <h1 style="text-align: center;">Key-Value Pairs</h1>
+  <h1 style="text-align: center;">Table 1</h1>
   <table>
     <thead>
       <tr>
@@ -29,25 +34,53 @@
         <th>Value</th>
       </tr>
     </thead>
-    <tbody id="table-body">
+    <tbody id="table-1-body">
     </tbody>
   </table>
   <script>
-    const dataMap = new Map([
+    function renderKeyValTable(table, map) {
+      map.forEach((value, key) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `<td>${key}</td><td>${value}</td>`;
+        table.appendChild(row);
+      });
+    }
+  </script>
+  <script>
+    const tableMap1 = new Map([
       ['A1', 41], ['A2', 18], ['A3', 21], ['A4', 63], ['A5', 2],
       ['A6', 53], ['A7', 5], ['A8', 57], ['A9', 60], ['A10', 93],
       ['A11', 28], ['A12', 3], ['A13', 90], ['A14', 39], ['A15', 80],
       ['A16', 88], ['A17', 49], ['A18', 60], ['A19', 26], ['A20', 28]
     ]);
 
-    const tableBody = document.getElementById('table-body');
+    const tableBody1 = document.getElementById('table-1-body');
 
-    dataMap.forEach((value, key) => {
-      const row = document.createElement('tr');
-      row.innerHTML = `<td>${key}</td><td>${value}</td>`;
-      tableBody.appendChild(row);
+    renderKeyValTable(tableBody1, tableMap1);
     });
   </script>
-</body>
-</html>
+  <h1 style="text-align: center;">Table 2</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Category</th>
+        <th>Value</th>
+      </tr>
+    </thead>
+    <tbody id="table-2-body">
+      <script>
+        const tableMap2 = new Map([
+          "Alpha", tableMap1.get('A5') + tableMap1.get('A20')],
+          ["Beta", tableMap1.get('A15') / tableMap1.get('A7')],
+          ["Charlie", tableMap1.get('A13') * tableMap1.get('A12')
+          ]);
 
+        const tableBody2 = document.getElementById('table-2-body')
+
+        renderKeyValTable(tableBody2, tableMap2);
+      </script>
+    </tbody>
+  </table>
+</body>
+
+</html>
